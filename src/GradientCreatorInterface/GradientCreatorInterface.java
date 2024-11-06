@@ -123,6 +123,7 @@ public class GradientCreatorInterface extends HBox {
                            ListGradient.setValue(ListGradient.getItems().get(0));
                            UpdateCombobox();
 
+                           
                   } catch (IOException | ResourcesFileErrorException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                            Logger.getLogger(GradientCreatorInterface.class.getName()).log(Level.SEVERE, null, ex);
                   }
