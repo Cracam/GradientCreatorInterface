@@ -37,7 +37,7 @@ public abstract class GradientCreator {
 
          private static final float maxBlend = (float) 7.5;
 
-         public GradientCreator(String name, boolean use2color, boolean slideBar1Used, String slidebar1_name, String slidebar1_unit, int slidebar1_min, int slidebar1_max, int slidebar1increment, boolean slideBar2Used, String slidebar2_name, String slidebar2_unit, int slidebar2_min, int slidebar2_max, int slidebar2increment) {
+         private GradientCreator(String name, boolean use2color, boolean slideBar1Used, String slidebar1_name, String slidebar1_unit, int slidebar1_min, int slidebar1_max, int slidebar1increment, boolean slideBar2Used, String slidebar2_name, String slidebar2_unit, int slidebar2_min, int slidebar2_max, int slidebar2increment) {
                   this.name = name;
                   this.use2color = use2color;
                   this.slideBar1Used = slideBar1Used;
