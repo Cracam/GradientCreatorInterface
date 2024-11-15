@@ -2,11 +2,7 @@ package GradientCreatorInterface;
 
 
 import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
 
 public class GradientCreatorUpDown extends GradientCreator {
 
