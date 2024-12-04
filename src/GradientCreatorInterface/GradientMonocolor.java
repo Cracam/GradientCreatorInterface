@@ -30,12 +30,25 @@ public class GradientMonocolor extends GradientCreator {
                         if (y_dim <= 0) {
                                 throw new NotA2DTable();
                         }
-                        
+
                 BufferedImage coloredImage = new BufferedImage(x_dim ,y_dim, BufferedImage.TYPE_INT_ARGB);
                 Graphics2D g2d = coloredImage.createGraphics();
                 g2d.setColor(color1);
                 g2d.fillRect(0, 0, x_dim, y_dim);
                 g2d.dispose();
+                
+
+                for (int i = 0; i < x_dim; i++) {
+                        for (int j = 0; j < y_dim; j++) {
+                                int rgba = (opacityTable[i][j] << 24) | (color1.getRed() << 16) | (color1.getGreen() << 8) | color1.getBlue();
+                                coloredImage.setRGB(i, j, rgba);
+                        }
+                }
+         
+                
+                
+                
+                
                 return coloredImage;
                 
                   } catch (NotA2DTable ex) {

@@ -128,6 +128,8 @@ public class GradientCreatorInterface extends HBox {
 
                         ListGradient.setValue(ListGradient.getItems().get(0));
                         UpdateCombobox();
+                        
+                        changed.set(false);//to reset the change after the Update Combobox 
 
                 } catch (IOException | ResourcesFileErrorException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                         Logger.getLogger(GradientCreatorInterface.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,7 +189,6 @@ public class GradientCreatorInterface extends HBox {
                 preview.setImage(previewImage);
                 
                 changed.set(true);
-
         }
 
         @FXML
@@ -328,6 +329,7 @@ public class GradientCreatorInterface extends HBox {
 
         public void setChanged(boolean value) {
                         this.changed.set(value);
+                       // System.out.println("Setting changed property to: " + value);
         }
         
         /**
@@ -341,7 +343,7 @@ public class GradientCreatorInterface extends HBox {
                 double colorIntensity = getColorIntensity();
                 double param1 = getParam1();
                 double param2 = getParam2();
-                
+
                 return this.getGradient().generateColoredImage(opacityTable, color1,color2, colorIntensity, param1, param2);
         }
 

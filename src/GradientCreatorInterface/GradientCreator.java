@@ -156,15 +156,18 @@ public abstract class GradientCreator {
 
                 for (int i = 0; i < width; i++) {
                         for (int j = 0; j < height; j++) {
-                                float value = blendTable[i][j];
-                                int red = (int) (color1.getRed() * value + color2.getRed() * (1 - value));
-                                int green = (int) (color1.getGreen() * value + color2.getGreen() * (1 - value));
-                                int blue = (int) (color1.getBlue() * value + color2.getBlue() * (1 - value));
-                                int rgba = (opacityTable[i][j] << 24) | (red << 16) | (green << 8) | blue;
-                                image.setRGB(i, j, rgba);
+                                if (opacityTable[i][j]==0){
+                                        image.setRGB(i, j, 0);//Derectly set evryting to 0 if opacity is null (To optimise)
+                                }else{
+                                        float value = blendTable[i][j];
+                                        int red = (int) (color1.getRed() * value + color2.getRed() * (1 - value));
+                                        int green = (int) (color1.getGreen() * value + color2.getGreen() * (1 - value));
+                                        int blue = (int) (color1.getBlue() * value + color2.getBlue() * (1 - value));
+                                        int rgba = (opacityTable[i][j] << 24) | (red << 16) | (green << 8) | blue;
+                                        image.setRGB(i, j, rgba);
+                                }
                         }
                 }
-
                 return image;
         }
 
@@ -200,5 +203,7 @@ public abstract class GradientCreator {
                 }
                 return array;
         }
-
+        
+        
+        
 }
