@@ -202,6 +202,7 @@ public class GradientCreatorInterface extends HBox {
                 } else {
                         LabelParam1.setText("");
                 }
+
 //        
 //        
 //        
