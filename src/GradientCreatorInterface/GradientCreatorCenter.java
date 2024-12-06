@@ -2,10 +2,10 @@ package GradientCreatorInterface;
 
 import java.awt.Color;
 
-public class GradientCreatorUpDown extends GradientCreator {
+public class GradientCreatorCenter extends GradientCreator {
 
-        public GradientCreatorUpDown() {
-                super("Haut-bas", true);
+        public GradientCreatorCenter() {
+                super("Centré", true);
         }
 
         @Override
@@ -15,15 +15,20 @@ public class GradientCreatorUpDown extends GradientCreator {
 
                 float[][] blendTable = new float[x_dim][y_dim];
 
+                int center_x = (int) x_dim / 2;
+                int center_y = (int) y_dim / 2;
+                int max_distance = (int) (Math.sqrt(Math.pow((x_dim / 2), 2) + Math.pow((y_dim / 2), 2)));
+
+                float distance_to_center;
+
                 // Loop through each pixel of the input image
                 for (int y = 0; y < y_dim; y++) {
-                        float alphaBlend = (float) Math.pow((float) y / (y_dim - 1), colorIntensityParam);
                         for (int x = 0; x < x_dim; x++) {
-                                blendTable[x][y] = alphaBlend;
+                                distance_to_center = (float) Math.sqrt(Math.pow((x - center_x), 2) + Math.pow((y - center_y), 2));
+                                blendTable[x][y] = (float) (Math.pow((distance_to_center / max_distance), colorIntensityParam));
                         }
                 }
                 return blendTable;
 
         }
 }
-//blend x2 if >1 *15 else nothing

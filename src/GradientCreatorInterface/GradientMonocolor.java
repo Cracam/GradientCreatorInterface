@@ -6,8 +6,8 @@ package GradientCreatorInterface;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.image.Image;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class GradientMonocolor extends GradientCreator {
@@ -18,15 +18,50 @@ public class GradientMonocolor extends GradientCreator {
 
 
 
-    @Override
-    public BufferedImage generateColoredImage(BufferedImage image_in, Color color1, Color color2, double colorIntensityParam, double param1, double param2) {
-        BufferedImage coloredImage = new BufferedImage(image_in.getWidth(), image_in.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = coloredImage.createGraphics();
-        g2d.setColor(color1);
-        g2d.fillRect(0, 0, image_in.getWidth(), image_in.getHeight());
-        g2d.dispose();
-        return coloredImage;
-    }
+        @Override
+        public BufferedImage generateColoredImage(int[][] opacityTable ,Color color1, Color color2, double colorIntensityParam, double param1, double param2) {
+                try {
+
+                        int x_dim = opacityTable.length;
+                        if (x_dim <= 0) {
+                                throw new NotA2DTable();
+                        }
+                        int y_dim = opacityTable[0].length;
+                        if (y_dim <= 0) {
+                                throw new NotA2DTable();
+                        }
+
+                BufferedImage coloredImage = new BufferedImage(x_dim ,y_dim, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2d = coloredImage.createGraphics();
+                g2d.setColor(color1);
+                g2d.fillRect(0, 0, x_dim, y_dim);
+                g2d.dispose();
+                
+
+                for (int i = 0; i < x_dim; i++) {
+                        for (int j = 0; j < y_dim; j++) {
+                                int rgba = (opacityTable[i][j] << 24) | (color1.getRed() << 16) | (color1.getGreen() << 8) | color1.getBlue();
+                                coloredImage.setRGB(i, j, rgba);
+                        }
+                }
+         
+                
+                
+                
+                
+                return coloredImage;
+                
+                  } catch (NotA2DTable ex) {
+                        Logger.getLogger(GradientCreatorLeftRight.class.getName()).log(Level.SEVERE, null, ex);
+                        return null;
+                }
+        }
+
+        @Override
+        protected float[][] generateBlendTable(int x, int y, Color color1, Color color2, double colorIntensityParam, double param1, double param2) {
+                System.out.println("generateBlendTable -- Gradient Monocolor -- This methods is not mean to be executed");
+                return null;
+        }
 
 
 }
