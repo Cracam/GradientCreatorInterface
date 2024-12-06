@@ -111,7 +111,7 @@ public class GradientCreatorInterface extends HBox {
 
                         // Create a dictionary of the GradientCreator class
                         gradientMap = new HashMap<>();
-                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class/* add more gradient classes here */)
+                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class/* add more gradient classes here */)
                                 .collect(Collectors.toSet());
                         for (Class<? extends GradientCreator> gradientClass : gradientClasses) {
                                 GradientCreator gradient = gradientClass.getDeclaredConstructor().newInstance();
@@ -347,8 +347,54 @@ public class GradientCreatorInterface extends HBox {
                 return this.getGradient().generateColoredImage(opacityTable, color1,color2, colorIntensity, param1, param2);
         }
 
+        
+        /**
+         * 
+         * @return 
+         */
+        public String getSelectedGradientName(){
+                return this.getGradient().getName();
+        }
+        
+        
+        /**
+         * This function set the gradient combobox value into it's name
+         * @param gradientName 
+         */
+        public void setSelectedGradientByName(String gradientName) {
+                try {
+                        if (!ListGradient.getItems().contains(gradientName)) {
+                                throw new ThisGradientDoesntExist("the gradient you want to open doesn't exist in this version " + gradientName);
+                        }
 
+                        ListGradient.setValue(gradientName);
+                         this.UpdateGradient();
+                         
+                } catch (ThisGradientDoesntExist ex) {
+                        Logger.getLogger(GradientCreatorInterface.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
+        }
+        
+                /**
+         * This program will allow the user to load the data saved before;
+         *
+         * @param gradientName - name of the gradient if the name dont exist set
+         * it to one that exste (left_right)
+         * @param color1
+         * @param color2
+         * @param param1
+         * @param colorIntensity
+         * @param param2
+         */
+        public void setInterfaceState(String gradientName, Color color1, Color color2, double colorIntensity, double param1, double param2) {
+                setSelectedGradientByName(gradientName);
+                ColorPicker1.setValue(convertAwtColorToJavafxColor(color1));
+                ColorPicker2.setValue(convertAwtColorToJavafxColor(color2));
+                 SlideBarColorIntensity.setValue(colorIntensity);
+                SlideBarParam1.setValue(param1);
+                SlideBarParam2.setValue(param2);
+        }
 
 
 }
