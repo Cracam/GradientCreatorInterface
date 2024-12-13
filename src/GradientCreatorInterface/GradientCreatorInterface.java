@@ -111,7 +111,7 @@ public class GradientCreatorInterface extends HBox {
 
                         // Create a dictionary of the GradientCreator class
                         gradientMap = new HashMap<>();
-                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class,GradientCreatorDiagonalLeft.class,GradientCreatorDiagonalRight.class/* add more gradient classes here */)
+                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class,GradientCreatorDiagonalLeft.class,GradientCreatorDiagonalRight.class,GradientCreatorDimamond.class/* add more gradient classes here */)
                                 .collect(Collectors.toSet());
                         for (Class<? extends GradientCreator> gradientClass : gradientClasses) {
                                 GradientCreator gradient = gradientClass.getDeclaredConstructor().newInstance();
