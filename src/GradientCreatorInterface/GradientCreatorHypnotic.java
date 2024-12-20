@@ -22,9 +22,7 @@ public class GradientCreatorHypnotic extends GradientCreator {
 
                 //     double branch_angle = Math.PI / num_branches;
                 // Loop through each pixel of the input image
-                System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
-                                System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
-                                                System.out.println("////////////////////////////////////////////////////////////////////////////////////////");
+            
 
                 for (int y = 0; y < y_dim; y++) {
                         for (int x = 0; x < x_dim; x++) {
