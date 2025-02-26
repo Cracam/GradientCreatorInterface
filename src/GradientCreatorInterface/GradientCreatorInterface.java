@@ -394,6 +394,7 @@ public class GradientCreatorInterface extends HBox {
                  SlideBarColorIntensity.setValue(colorIntensity);
                 SlideBarParam1.setValue(param1);
                 SlideBarParam2.setValue(param2);
+                 this.UpdateGradient();
         }
 
 

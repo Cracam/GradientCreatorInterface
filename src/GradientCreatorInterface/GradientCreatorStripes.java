@@ -54,16 +54,7 @@ public class GradientCreatorStripes extends GradientCreator {
                         }
                 }
                 return blendTable;
-
         }
 
-        public static double pythonModulo(double dividend, double divisor) {
-
-                int remainder = (int) (dividend) % (int) (divisor);
-                if (remainder < 0) {
-                        remainder += Math.abs(divisor);
-                }
-                return remainder;
-        }
 }
 //blend x2 if >1 *15 else nothing
