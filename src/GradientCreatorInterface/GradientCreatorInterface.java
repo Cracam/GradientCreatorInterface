@@ -83,7 +83,7 @@ public class GradientCreatorInterface extends HBox {
         public GradientCreatorInterface() {
                 try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GradientPicker.fxml"));
-                        System.out.println(fxmlLoader.getLocation());
+                //        System.out.println(fxmlLoader.getLocation());
                         if (fxmlLoader == null) {
                                 throw new ResourcesFileErrorException();
                         }
@@ -126,7 +126,7 @@ public class GradientCreatorInterface extends HBox {
                         SlideBarColorIntensity.setValue(0.5);
                         SlideBarColorIntensity.setBlockIncrement(0.001);
 
-                        ListGradient.setValue(ListGradient.getItems().get(0));
+                        ListGradient.setValue(ListGradient.getItems().get(9));//to set to Monocolor
                         UpdateCombobox();
                         
                         changed.set(false);//to reset the change after the Update Combobox 
