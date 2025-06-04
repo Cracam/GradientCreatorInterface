@@ -83,7 +83,7 @@ public class GradientCreatorInterface extends HBox {
         public GradientCreatorInterface() {
                 try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GradientPicker.fxml"));
-                        System.out.println(fxmlLoader.getLocation());
+                //        System.out.println(fxmlLoader.getLocation());
                         if (fxmlLoader == null) {
                                 throw new ResourcesFileErrorException();
                         }
@@ -111,7 +111,7 @@ public class GradientCreatorInterface extends HBox {
 
                         // Create a dictionary of the GradientCreator class
                         gradientMap = new HashMap<>();
-                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class/* add more gradient classes here */)
+                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class,GradientCreatorDiagonalLeft.class,GradientCreatorDiagonalRight.class,GradientCreatorDimamond.class,GradientCreatorStar.class,GradientCreatorHypnotic.class,GradientCreatorStripes.class/* add more gradient classes here */)
                                 .collect(Collectors.toSet());
                         for (Class<? extends GradientCreator> gradientClass : gradientClasses) {
                                 GradientCreator gradient = gradientClass.getDeclaredConstructor().newInstance();
@@ -126,7 +126,7 @@ public class GradientCreatorInterface extends HBox {
                         SlideBarColorIntensity.setValue(0.5);
                         SlideBarColorIntensity.setBlockIncrement(0.001);
 
-                        ListGradient.setValue(ListGradient.getItems().get(0));
+                        ListGradient.setValue(ListGradient.getItems().get(9));//to set to Monocolor
                         UpdateCombobox();
                         
                         changed.set(false);//to reset the change after the Update Combobox 
@@ -395,6 +395,7 @@ public class GradientCreatorInterface extends HBox {
                  SlideBarColorIntensity.setValue(colorIntensity);
                 SlideBarParam1.setValue(param1);
                 SlideBarParam2.setValue(param2);
+                 this.UpdateGradient();
         }
 
 

@@ -102,7 +102,7 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <ColorPicker fx:id="ColorPicker1" onAction="#updateColor1" />
+                                    <ColorPicker fx:id="ColorPicker1" minWidth="139.0" onAction="#updateColor1" />
                                     <Label text="Couleur 2">
                                        <font>
                                           <Font size="14.0" />
@@ -111,7 +111,7 @@
                                           <Insets top="20.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <ColorPicker fx:id="ColorPicker2" onAction="#updateColor2" />
+                                    <ColorPicker fx:id="ColorPicker2" minWidth="139.0" onAction="#updateColor2" />
                                  </children>
                               </VBox>
                            </children>
