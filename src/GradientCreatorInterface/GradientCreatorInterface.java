@@ -33,7 +33,7 @@ public class GradientCreatorInterface extends HBox {
 
         private static final boolean allowOpacity = false;
 
-                private final BooleanProperty changed = new SimpleBooleanProperty(false);
+        private final BooleanProperty changed = new SimpleBooleanProperty(false);
 
         @FXML
         private Button ToogleButton;
@@ -77,13 +77,10 @@ public class GradientCreatorInterface extends HBox {
         private Button InvertIntensityButton;
         private ImageView InvertIntensityImage;
 
-        
-        
-
         public GradientCreatorInterface() {
                 try {
                         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GradientPicker.fxml"));
-                //        System.out.println(fxmlLoader.getLocation());
+                        //        System.out.println(fxmlLoader.getLocation());
                         if (fxmlLoader == null) {
                                 throw new ResourcesFileErrorException();
                         }
@@ -111,7 +108,7 @@ public class GradientCreatorInterface extends HBox {
 
                         // Create a dictionary of the GradientCreator class
                         gradientMap = new HashMap<>();
-                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class,GradientCreatorDiagonalLeft.class,GradientCreatorDiagonalRight.class,GradientCreatorDimamond.class,GradientCreatorStar.class,GradientCreatorHypnotic.class,GradientCreatorStripes.class/* add more gradient classes here */)
+                        Set<Class<? extends GradientCreator>> gradientClasses = Stream.of(GradientMonocolor.class, GradientCreatorLeftRight.class, GradientCreatorUpDown.class, GradientCreatorCenter.class, GradientCreatorDiagonalLeft.class, GradientCreatorDiagonalRight.class, GradientCreatorDimamond.class, GradientCreatorStar.class, GradientCreatorHypnotic.class, GradientCreatorStripes.class/* add more gradient classes here */)
                                 .collect(Collectors.toSet());
                         for (Class<? extends GradientCreator> gradientClass : gradientClasses) {
                                 GradientCreator gradient = gradientClass.getDeclaredConstructor().newInstance();
@@ -128,7 +125,7 @@ public class GradientCreatorInterface extends HBox {
                         SlideBarColorIntensity.setBlockIncrement(0.001);
 
                         UpdateCombobox();
-                        
+
                         changed.set(false);//to reset the change after the Update Combobox 
 
                 } catch (IOException | ResourcesFileErrorException | NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
@@ -187,7 +184,7 @@ public class GradientCreatorInterface extends HBox {
 
                 Image previewImage = getGradient().generatePreview(color1, color2, colorIntensity, param1, param2);
                 preview.setImage(previewImage);
-                
+
                 changed.set(true);
         }
 
@@ -242,8 +239,7 @@ public class GradientCreatorInterface extends HBox {
                 return new Color(color.getRed(), color.getGreen(), color.getBlue(), 255);
         }
 
-        @FXML
-        private void UpdateCombobox() {
+        public void refrashInterface() {
                 String selectedGradientName = getComboboxValue();
                 GradientCreator selectedGradient = gradientMap.get(selectedGradientName);
 
@@ -278,7 +274,12 @@ public class GradientCreatorInterface extends HBox {
                         SlideBarColorIntensity.setDisable(true);
                         InvertIntensityButton.setDisable(true);
                 }
+        }
 
+        @FXML
+        private void UpdateCombobox() {
+
+                refrashInterface();
                 UpdateBar1();
                 UpdateBar2();
         }
@@ -324,43 +325,44 @@ public class GradientCreatorInterface extends HBox {
         }
 //-----------------------------------------------------------------------------------------------------------------------------    
 
-        public BooleanProperty  isChanged() {
+        public BooleanProperty isChanged() {
                 return changed;
         }
 
         public void setChanged(boolean value) {
-                        this.changed.set(value);
-                       // System.out.println("Setting changed property to: " + value);
+                this.changed.set(value);
+                // System.out.println("Setting changed property to: " + value);
         }
-        
+
         /**
-         * This method return the recolored Image using a mask for opacity management and size of the ImageOut
+         * This method return the recolored Image using a mask for opacity
+         * management and size of the ImageOut
+         *
          * @param opacityTable the mask
-         * @return 
+         * @return
          */
-        public BufferedImage getImageOut(int[][] opacityTable){
+        public BufferedImage getImageOut(int[][] opacityTable) {
                 Color color1 = getColor1();
                 Color color2 = getColor2();
                 double colorIntensity = getColorIntensity();
                 double param1 = getParam1();
                 double param2 = getParam2();
 
-                return this.getGradient().generateColoredImage(opacityTable, color1,color2, colorIntensity, param1, param2);
+                return this.getGradient().generateColoredImage(opacityTable, color1, color2, colorIntensity, param1, param2);
         }
 
-        
         /**
-         * 
-         * @return 
+         *
+         * @return
          */
-        public String getSelectedGradientName(){
+        public String getSelectedGradientName() {
                 return this.getGradient().getName();
         }
-        
-        
+
         /**
          * This function set the gradient combobox value into it's name
-         * @param gradientName 
+         *
+         * @param gradientName
          */
         public void setSelectedGradientByName(String gradientName) {
                 try {
@@ -369,15 +371,15 @@ public class GradientCreatorInterface extends HBox {
                         }
 
                         ListGradient.setValue(gradientName);
-                         this.UpdateGradient();
-                         
+                        this.UpdateGradient();
+
                 } catch (ThisGradientDoesntExist ex) {
                         Logger.getLogger(GradientCreatorInterface.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
         }
-        
-                /**
+
+        /**
          * This program will allow the user to load the data saved before;
          *
          * @param gradientName - name of the gradient if the name dont exist set
@@ -392,11 +394,10 @@ public class GradientCreatorInterface extends HBox {
                 setSelectedGradientByName(gradientName);
                 ColorPicker1.setValue(convertAwtColorToJavafxColor(color1));
                 ColorPicker2.setValue(convertAwtColorToJavafxColor(color2));
-                 SlideBarColorIntensity.setValue(colorIntensity);
+                SlideBarColorIntensity.setValue(colorIntensity);
                 SlideBarParam1.setValue(param1);
                 SlideBarParam2.setValue(param2);
-                 this.UpdateGradient();
+                this.UpdateGradient();
         }
-
 
 }
