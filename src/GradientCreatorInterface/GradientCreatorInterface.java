@@ -120,13 +120,13 @@ public class GradientCreatorInterface extends HBox {
 
                         // Fill the ListGradient ComboBox
                         ListGradient.getItems().addAll(gradientMap.keySet());
+                        ListGradient.setValue("Mono-Color");
 
                         SlideBarColorIntensity.setMin(0.001);
                         SlideBarColorIntensity.setMax(0.999);
                         SlideBarColorIntensity.setValue(0.5);
                         SlideBarColorIntensity.setBlockIncrement(0.001);
 
-                        ListGradient.setValue(ListGradient.getItems().get(9));//to set to Monocolor
                         UpdateCombobox();
                         
                         changed.set(false);//to reset the change after the Update Combobox 
